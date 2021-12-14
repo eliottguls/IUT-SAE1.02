@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-#define MAX 10
-
+#define MAX 500000
 char choix[20];
 
 
@@ -22,12 +22,11 @@ int partition_dec(int tab[], int deb, int fin) {
 
 
   //on compare avec le pivot tous les elements du tab
-  for (int j = deb; j < fin; j++) {
-    if (tab[j] >= pivot) {
+  for (int j = deb; j < fin; j++){
+    if (tab[j] >= pivot){
         
       // si un element plus petit que le pivot
       // on l'échange avec avec l'élément le plsu grand
-      // echange it with the greater element pointed by i
       i++;
       echange(&tab[i], &tab[j]);
     }
@@ -48,12 +47,11 @@ int partition_cr(int tab[], int deb, int fin) {
 
 
   //on compare avec le pivot tous les elements du tab
-  for (int j = deb; j < fin; j++) {
-    if (tab[j] <= pivot) {
+  for (int j = deb; j < fin; j++){
+    if (tab[j] <= pivot){
         
       // si un element plus petit que le pivot
       // on l'échange avec avec l'élément le plsu grand
-      // echange it with the greater element pointed by i
       i++;
       echange(&tab[i], &tab[j]);
     }
@@ -76,7 +74,7 @@ void quickSort(int tab[], int deb, int fin) {
 
       // appel récursif sur la partie à gauche du pivot
       quickSort(tab, deb, pi - 1);
-      //appel récursif sur la partie à droite du pivot
+      // appel récursif sur la partie à droite du pivot
       quickSort(tab, pi + 1, fin);
     }
     else{
@@ -84,45 +82,59 @@ void quickSort(int tab[], int deb, int fin) {
 
       // appel récursif sur la partie à gauche du pivot
       quickSort(tab, deb, pi - 1);
-      //appel récursif sur la partie à droite du pivot
+      // appel récursif sur la partie à droite du pivot
       quickSort(tab, pi + 1, fin);
     }
-    
-    
-    
-    
-    
   }
 }
 
-void afficheTab(int tab[], int taille) {
-  for (int i = 0; i < taille; ++i) {
-    printf("%d  ", tab[i]);
+
+void alea(int tab[], int taille){
+  srand(time(NULL));
+  int rand_int;
+  for (int j=0;j<MAX;j++){
+     rand_int = rand() % 99999;
+     rand_int++;
+     tab[j]=rand_int;
+  }
+}
+
+void afficheTabLimite(int tab[], int lim){
+  for(int i=0;i<lim;i++){
+    printf("%d, ", tab[i]);
   }
   printf("\n");
 }
 
 int main() {
-  int tab[MAX] = {99, 47, 54, 12, 25, 39, 18, 26, 81, 39};
-  //int tab_fav[MAX] = {12, 18, 25, 26, 39, 39, 47, 54, 81, 99}; 
-  //int tab_defav[MAX] = {99, 81, 54, 47, 39, 39, 26, 25, 18, 12};
+  int tab[MAX];
 
-  printf("\t\t TRI RAPIDE\n");
-  printf("\n");
-    
+  int lim=-1; // -1 sert à vérifier qu'une valeur sera bien saisi dans lim pour éviter de saisir une chaine de caractère amsi que le programme continu
+  
+
+  system("clear");
+  
+  alea(tab, MAX);
+  printf("Combien de valeurs du tableau voulez-vous afficher ? \n");
+  scanf("%d", &lim);
+  while ((lim<=0) && lim>MAX){
+    printf("nombre de valeurs > 0 et < %d", MAX);
+    scanf("%d", &lim);
+  }
+  printf("          TRI RAPIDE\n");
   printf("tableau avant le tri :\n");
-  afficheTab(tab, MAX);
-  printf("\n");
+  afficheTabLimite(tab, lim);
   
   printf("Quel tri voulez-vous faire ? croissant/décroissant : \n");
   scanf("%s", choix);
-  printf("\n");
+
   while (strcmp(choix,"croissant") != 0 && (strcmp(choix,"décroissant")!=0)){
     printf("Saisir croissant ou décroissant \n");
     scanf("%s", choix);
   }
+
   quickSort(tab, 0, MAX -1);
   
   printf("tableau après le tri :\n");
-  afficheTab(tab, MAX);
+  afficheTabLimite(tab, lim);
 }

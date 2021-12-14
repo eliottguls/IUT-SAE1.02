@@ -39,7 +39,7 @@ In order to make these test and have correct results, we will do the average of 
 All our results we be presented in a table for each case. We will have to deal with the strings sorting alogorithms too to make the same tests.
 
 ### Step 5 :
-Now it's time to use real datas. The main idea of this step is to copy some Covid datas in a tables which we will be able to sort depending diferent criterias.<br> That's why we will have to declare and use a table of structures "covid".
+Now it's time to use real datas. The main idea of this step is to copy some Covid datas in a tables which we will be able to sort depending diferent criterias.<br> That's why we will have to declare and use a table of structures entitled "covid".
 
 
 ## Dates to deliver our works depending on the previous steps :

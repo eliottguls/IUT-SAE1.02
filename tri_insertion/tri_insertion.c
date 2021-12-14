@@ -1,92 +1,109 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <time.h>
+#include <string.h>
 
 #define N 10
-typedef int tableau[N];
+#define NB_INT 50 
 
-/**
- * @brief cette procédure permet d'échanger deux valeurs en en utili
- * 
- * @param tab 
- * @param i 
- * @param j 
- */
-void exchange(tableau tab, int i, int j){
+typedef int big_tableau[NB_INT];
+
+void alea(big_tableau tab){
+  int i, nb_alea;
+  srand(time(NULL)); 
+  for (i=0; i<NB_INT; i++){
+    nb_alea = rand() % RAND_MAX;    
+    nb_alea++;
+    tab[i] = nb_alea;
+  }
+}
+
+void exchange(int tab_limit[], int i, int j){
     int indice_tmp,
         compteur_echange;
-    compteur_echange = 0;
-    indice_tmp = tab[i];
-    tab[i] = tab[j];
-    tab[j] = indice_tmp;
-    compteur_echange ++;
+        compteur_echange = 0;
+        indice_tmp = tab_limit[i];
+        tab_limit[i] = tab_limit[j];
+        tab_limit[j] = indice_tmp;
+        compteur_echange ++;
 }
 
-void insertion_croissant(tableau tab){
+void insertion_croissant(int tab_limit[], int limite){
     int i, j, min, imin;
-    for (i=0; i<N-1; i++){
-        min=tab[i];  
+    for (i=0; i<limite-1; i++){
+        min=tab_limit[i];  
         imin = i; 
-        for (j=i+1; j < N; j++){
-            if (tab[j] < min){
-                min = tab[j];
+        for (j=i+1; j<limite; j++){
+            if (tab_limit[j] < min){
+                min = tab_limit[j];
                 imin = j;
             }
         }
-        exchange(tab, i, imin); 
+        exchange(tab_limit, i, imin); 
     }
 }
 
-void insertion_decroissant(tableau tab){
+void insertion_decroissant(int tab_limit[], int limite){
     int i, j, min, imin;
-    for (i=0; i<N-1; i++){
-        min=tab[i];  
+    for (i=0; i<limite-1; i++){
+        min=tab_limit[i];  
         imin = i; 
-        for (j=i+1; j < N; j++){
-            if (tab[j] > min){
-                min = tab[j];
+        for (j=i+1; j < limite; j++){
+            if (tab_limit[j] > min){
+                min = tab_limit[j];
                 imin = j;
             }
         }
-        exchange(tab, i, imin); 
+        exchange(tab_limit, i, imin); 
     }
 }
 
-void affiche_tab(tableau tab){
+void affiche_tab_limite(big_tableau tab, int limite, int tab_limit[]){
     int i;
-    for (i=0; i<N; i++){
-        printf("%d, ", tab[i]);
+    for (i=0; i<limite; i++){
+        tab_limit[i] = tab[i];
+        printf("%d ", tab_limit[i]);
     }
 }
+
+void affiche_tab(int tab_limit[], int limite){
+    int i;
+    for (i=0; i<limite; i++){
+        printf("%d ", tab_limit[i]);
+    }
+}
+
+
+
 
 int main(){
+    int limite;
     char choix[10];
     system("clear");
-    tableau tab = {99, 47, 54, 12, 25, 39, 18, 26, 81, 39};
-    // tableau tab_fav = {12, 18, 25, 26, 39, 39, 47, 54, 81, 99};
-    // tableau tab_defav = {99, 81, 54, 47, 39, 39, 26, 25, 18, 12};
-    printf("\t\tTRI PAR SELECTION\n");
-    printf("\n");
+    printf("Combien de nombre voulez-vous afficher ?\n");
+    scanf("%d", &limite);
+    big_tableau tab = {};
+    int tab_limit[limite];
+    alea(tab);
     printf("tableau avant le tri :\n");
-    affiche_tab(tab);
-    printf("\n\n");
+    affiche_tab_limite(tab, limite, tab_limit);
+    printf("\n");
     printf("Quel tri voulez vous faire : croissant / decroissant\n");
     scanf("%s", choix);
-    printf("\n");
     while (((strcmp(choix, "croissant") != 0) && (strcmp(choix, "decroissant") != 0))){
             printf("ressaisissez entre croissant et decroissant\n");
             scanf("%s", choix);
-        }
+    }
     if (strcmp(choix, "croissant") == 0){
             printf("tableau après le tri :\n");
-            insertion_croissant(tab);
+            insertion_croissant(tab_limit, limite);
         }
     else{
             printf("tableau après le tri :\n");
-            insertion_decroissant(tab);
+            insertion_decroissant(tab_limit, limite);
         }
-    affiche_tab(tab);
+    affiche_tab(tab_limit, limite);
     printf("\n");
     return EXIT_SUCCESS;
 }
+
