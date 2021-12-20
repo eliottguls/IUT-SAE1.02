@@ -157,3 +157,4 @@ int main(){
     print_wd(tab_word);
     return EXIT_SUCCESS;
 }
+
