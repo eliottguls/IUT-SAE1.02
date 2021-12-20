@@ -1,0 +1,159 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
+
+#define N 10
+#define NB_CHAR 3
+
+typedef int tab_int[NB_CHAR][N];
+typedef char tab_char[NB_CHAR][N];
+
+void alea(tab_int tab_nb){
+    int i, j, nb_alea, nb_taille;
+    srand(time(NULL)); 
+    for (i=0; i<NB_CHAR; i++){
+        nb_taille = rand() % 6;    
+        nb_taille = nb_taille + 5;
+        tab_nb[i][j] = i;
+        for (j=0; j<nb_taille; j++){
+            nb_alea = rand() % 26;    
+            nb_alea = nb_alea + 97;
+            tab_nb[i][j] = nb_alea;
+        } 
+    }
+}
+
+void print_nb(tab_int tab_nb){
+    int i, j;
+    for (i=0; i<NB_CHAR; i++){
+        for (j=0; j<N; j++){
+            printf("%d ", tab_nb[i][j]);
+        }  
+    printf("\n"); 
+    }
+}
+
+void print_wd(tab_char tab_word){
+    int i, j;
+    for (i=0; i<NB_CHAR; i++){
+        for (j=0; i<N; i++){
+            printf("%c", tab_word[i][j]);
+        }
+    printf("\n");
+    }
+}  
+     
+
+void transform(tab_int tab_nb, tab_char tab_word){
+    int i, j;
+    for (i=0; i<NB_CHAR; i++){
+        printf("\n");
+        for (j=0; j<10; j++){
+            sprintf(tab_word[i][j], "%c", tab_nb[i][j]);
+            puts(tab_word[i][j]);
+        }
+    }
+}
+
+/*
+void exchange(tab_int tab_nb, int i, int j){
+    int indice_tmp,
+        compteur_echange;
+        compteur_echange = 0;
+        indice_tmp = tab_nb[i];
+        tab_nb[i] = tab_nb[j];
+        tab_nb[j] = indice_tmp;
+        compteur_echange ++;
+}
+
+void insertion_croissant(int tab_limit[], int limite){
+    int i, j, min, imin;
+    for (i=0; i<limite-1; i++){
+        min=tab_limit[i];  
+        imin = i; 
+        for (j=i+1; j<limite; j++){
+            if (tab_limit[j] < min){
+                min = tab_limit[j];
+                imin = j;
+            }
+        }
+        exchange(tab_limit, i, imin); 
+    }
+}
+
+void insertion_decroissant(int tab_limit[], int limite){
+    int i, j, min, imin;
+    for (i=0; i<limite-1; i++){
+        min=tab_limit[i];  
+        imin = i; 
+        for (j=i+1; j < limite; j++){
+            if (tab_limit[j] > min){
+                min = tab_limit[j];
+                imin = j;
+            }
+        }
+        exchange(tab_limit, i, imin); 
+    }
+}
+
+void affiche_tab_limite(tab_char tab, int limite, int tab_limit[]){
+    int i;
+    for (i=0; i<limite; i++){
+        tab_limit[i] = tab[i];
+        printf("%d ", tab_limit[i]);
+    }
+}
+
+void affiche_tab(int tab_limit[], int limite){
+    int i;
+    for (i=0; i<limite; i++){
+        printf("%d ", tab_limit[i]);
+    }
+}
+
+
+int main(){
+    int limite;
+    char choix[10];
+    system("clear");
+    printf("Combien de nombre voulez-vous afficher ?\n");
+    scanf("%d", &limite);
+    tab_char tab = {};
+    int tab_limit[limite];
+    alea(tab);
+    printf("tableau avant le tri :\n");
+    affiche_tab_limite(tab, limite, tab_limit);
+    printf("\n");
+    printf("Quel tri voulez vous faire : croissant / decroissant\n");
+    scanf("%s", choix);
+    while (((strcmp(choix, "croissant") != 0) && (strcmp(choix, "decroissant") != 0))){
+            printf("ressaisissez entre croissant et decroissant\n");
+            scanf("%s", choix);
+    }
+    if (strcmp(choix, "croissant") == 0){
+            printf("tableau après le tri :\n");
+            insertion_croissant(tab_limit, limite);
+        }
+    else{
+            printf("tableau après le tri :\n");
+            insertion_decroissant(tab_limit, limite);
+        }
+    affiche_tab(tab_limit, limite);
+    printf("\n");
+    return EXIT_SUCCESS;
+}
+
+*/
+
+int main(){
+    //int nb;
+    tab_int tab_nb = {};
+    tab_char tab_word = {};
+    alea(tab_nb);
+    print_nb(tab_nb);
+    transform(tab_nb, tab_word);
+    printf("\n");
+    print_wd(tab_word);
+    return EXIT_SUCCESS;
+}
