@@ -50,7 +50,8 @@ Now it's time to use real datas. The main idea of this step is to copy some Covi
 |22th December|Source code of our programs from step 3|On Moodle|
 |9th January|Source code of our programs from step 4|On Moodle|
 |16th January|Source code of our programs from step 5|On Moodle|
-|17th January|Noted practical work|   |
+|17th January|Noted practical work|   |.
+
 
 
 
